@@ -18,8 +18,6 @@ const captionSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true,
-        lowerCase:true,
-        match:[5,"email must be at least 5 character long"]
     },
     password:{
         type:String,
@@ -74,17 +72,19 @@ const captionSchema = new mongoose.Schema({
 
 })
 
-captionSchema.method.generateToken = ()=>{
+captionSchema.methods.generateToken = function(){
     const token = jwt.sign({_id:this._id},process.env.JWT_SECREAT,{expiresIn:"24h"})
     return token
 }
 
-captionSchema.static.hashPassword = async (password)=>{
+captionSchema.statics.hashPassword = async function(password){
 
     return await bcrypt.hash(password,10)
 
 }
 
-captionSchema.method.comparePassword = async (password)=>{
+captionSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password,this.password)
 }
+
+export const Caption = mongoose.model("Caption",captionSchema)
