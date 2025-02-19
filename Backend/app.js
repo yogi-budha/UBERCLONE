@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 dotenv.config()
 import express from "express"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 
 import { connectMongoose } from "./db/connectDB.js"
 import userRouter from "./routes/user.routes.js"
@@ -15,6 +16,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.use(cors())
+app.use(cookieParser())
+
+
 app.use("/user",userRouter)
 
 app.get("/",(req,res)=>{

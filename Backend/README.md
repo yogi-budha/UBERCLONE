@@ -103,3 +103,57 @@ Logs in an existing user.
 #### Validation Errors
 - `email`: Must be a valid email address.
 - `password`: Must be at least 6 characters long.
+
+### GET /user/profile
+
+#### Description
+Fetches the profile of the authenticated user.
+
+#### Response
+
+##### Success (200)
+```json
+{
+  "success": true,
+  "message": {
+    "_id": "string",
+    "fullName": {
+      "firstName": "string",
+      "lastName": "string"
+    },
+    "email": "string",
+    "socketId": "string"
+  }
+}
+```
+
+##### Error (400)
+```json
+{
+  "success": false,
+  "message": "string"
+}
+```
+
+### POST /user/logout
+
+#### Description
+Logs out the authenticated user.
+
+#### Response
+
+##### Success (200)
+```json
+{
+  "success": true,
+  "message": "logout successfully"
+}
+```
+
+##### Error (400)
+```json
+{
+  "success": false,
+  "message": "unauthorized"
+}
+```
