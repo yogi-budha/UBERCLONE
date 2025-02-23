@@ -1,7 +1,13 @@
-import { useState } from "react";
+import {  useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import  { userContext } from "../context/UserContext";
+import axios from 'axios'
+import { toast } from "react-hot-toast";
+
 
 function UserSignUp() {
+  const {user,setUser}=useContext(userContext)
+
   const [userData, setUserData] = useState({
     fullName: {
       firstName: "",
@@ -11,9 +17,16 @@ function UserSignUp() {
     password: "",
   });
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
-    console.log(userData);
+    const response  = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`,userData)
+
+    if(response.status == 200){
+      toast.success("User Created Successfully")
+    }
+
+   setUser(response.data)
+   setUserData({fullName:{firstName:"",lastName:""},email:"",password:""})
   };
   return (
     <div className="w-full p-6 h-screen">
@@ -101,7 +114,7 @@ function UserSignUp() {
           </div>
 
           <button className="bg-black text-white font-semibold text-lg px-3 py-2 rounded mt-2 w-full">
-            Login
+            Create an Account
           </button>
           <p className="mt-4">
             Already have an account?{" "}

@@ -1,13 +1,36 @@
-import  { useState } from "react";
+import  { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../context/UserContext";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function UserSignIn() {
+
+  const {user,setUser}=useContext(userContext)
   const [userData,setUserData] = useState({email:"" ,password:""})
 
-  const submitHandler = (e)=>{
-    e.preventDefault()
-    console.log(userData)
+  const submitHandler = async (e)=>{
+    e.preventDefault();
+
+    try {
+      const response  = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`,userData)
+
+      if(response.status == 200){
+        toast.success("User Created Successfully")
+      }
+      
+      setUserData({email:"",password:""})
+   setUser(response.data)
+    } catch (error) {
+      if(error.response.status == 400){
+        toast.error(error.response.data.message)
+        
+      setUserData({email:"",password:""})
+      }
+    }
+    
   }
+  
   return (
     <div className="p-6 h-screen">
       <div className="mb-10">

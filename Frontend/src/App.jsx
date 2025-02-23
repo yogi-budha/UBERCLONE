@@ -10,6 +10,7 @@ import Home from "./pages/Home"
 
 function App() {
   return (
+
     <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/user-login" element={<UserSignIn/>} />
@@ -17,6 +18,7 @@ function App() {
     <Route path="/caption-login" element={<CaptionSignIn/>} />
     <Route path="/caption-signup" element={<CaptionSignUp/>} />
   </Routes>
+   
   )
   
 
