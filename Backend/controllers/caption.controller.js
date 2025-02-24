@@ -22,7 +22,7 @@ const registerCaption = async (req,res)=>{
     const token = await caption.generateToken()
     res.cookie(token)
 
-    return res.status(201).json({success:true,message:"caption is successfully registerd", caption,token})
+    return res.status(200).json({success:true,message:"caption is successfully registerd", caption,token})
     } catch (error) {
         console.log(error)
         return res.status(400).json({success:false,message:"error while registering the caption"})

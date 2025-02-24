@@ -5,9 +5,12 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import UserContext from './context/UserContext.jsx'
 import {Toaster} from 'react-hot-toast'
+import CaptionContext from './context/CaptionContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <UserContext>
+  <CaptionContext>
+
+      <UserContext>
   <StrictMode>
 
        <BrowserRouter>
@@ -17,4 +20,6 @@ createRoot(document.getElementById('root')).render(
    
   </StrictMode>,
     </UserContext>
+  </CaptionContext>
+
 )

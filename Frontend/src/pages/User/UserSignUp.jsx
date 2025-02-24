@@ -1,11 +1,12 @@
 import {  useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import  { userContext } from "../context/UserContext";
+import { Link, useNavigate } from "react-router-dom";
+import  { userContext } from "../../context/UserContext";
 import axios from 'axios'
 import { toast } from "react-hot-toast";
 
 
 function UserSignUp() {
+  const  navigate = useNavigate();
   const {user,setUser}=useContext(userContext)
 
   const [userData, setUserData] = useState({
@@ -19,13 +20,29 @@ function UserSignUp() {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    const response  = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`,userData)
+    try {
+         await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`,userData).then((res)=>{
+          
+    if(res.status == 200){
+      
+         setUser(res.data)
+      
+         toast.success("User Created Successfully")
+         
+        localStorage.setItem("token",res.data.message.token)
+         navigate("/home")
+    }
+         }).catch(error=>{
+          if(error.response.status == 400){
+        toast.error(error.response.data.error[0].msg)
+        
+      }
+         })
 
-    if(response.status == 200){
-      toast.success("User Created Successfully")
+    } catch (error) {
+      toast.error(error.message)
     }
 
-   setUser(response.data)
    setUserData({fullName:{firstName:"",lastName:""},email:"",password:""})
   };
   return (

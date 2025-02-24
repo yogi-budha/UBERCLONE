@@ -1,11 +1,12 @@
 import  { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { userContext } from "../context/UserContext";
+import { Link, useNavigate } from "react-router-dom";
+import { userContext } from "../../context/UserContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 function UserSignIn() {
 
+  const  navigate = useNavigate();
   const {user,setUser}=useContext(userContext)
   const [userData,setUserData] = useState({email:"" ,password:""})
 
@@ -17,10 +18,14 @@ function UserSignIn() {
 
       if(response.status == 200){
         toast.success("User Created Successfully")
+        setUser(response.data.message.user)
+      
+        localStorage.setItem("token",response.data.message.token)
+        
+        setUserData({email:"",password:""})
+        navigate("/home")
       }
       
-      setUserData({email:"",password:""})
-   setUser(response.data)
     } catch (error) {
       if(error.response.status == 400){
         toast.error(error.response.data.message)
