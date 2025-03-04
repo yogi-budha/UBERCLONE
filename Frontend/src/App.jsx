@@ -9,8 +9,10 @@ import Home from "./pages/User/Home"
 import UserWrapper from "./pages/User/UserWrapper"
 import UserLogout from "./pages/User/UserLogout"
 import CaptionHome from "./pages/Caption/CaptionHome"
-import CaptionWrapper from "./context/CaptionWrapper"
 import CaptionLogout from "./pages/Caption/CaptionLogout"
+import CaptionWrapper from "./pages/Caption/CaptionWrapper"
+import Payment from "./pages/Payment"
+import CaptionRading from "./pages/Caption/CaptionRading"
 
 
 
@@ -24,6 +26,8 @@ function App() {
     <Route path="/user-signup" element={<UserSignUp/>} />
     <Route path="/caption-login" element={<CaptionSignIn/>} />
     <Route path="/caption-signup" element={<CaptionSignUp/>} />
+    <Route path="/caption-Riding" element={<CaptionRading/>}/>
+    <Route path="/payment" element={<Payment/>} />
     <Route path="/home" element = {
       <UserWrapper>
 
@@ -39,7 +43,7 @@ function App() {
         
         }/>
 
-        <Route path = "/captionHOme" element={
+        <Route path = "/captionHome" element={
           <CaptionWrapper>
             <CaptionHome/>
           </CaptionWrapper>
@@ -52,6 +56,8 @@ function App() {
             </CaptionWrapper>
           }/>
   </Routes>
+
+ 
    
   )
   

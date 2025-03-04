@@ -9,7 +9,7 @@ function UserLogout({children}) {
     const token = localStorage.getItem("token")
     const handleLogout = async()=>{
 
-        await axios.post(`${import.meta.env.BASE_URL}/user/logout`,{
+        await axios.post(`${import.meta.env.VITE_BASE_URL}/user/logout`,{
             headers:{
                 Authorization: "Bearer "+token
             }

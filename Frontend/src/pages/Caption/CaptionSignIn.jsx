@@ -17,7 +17,7 @@ function CaptionSignIn() {
   
         if(response.status == 200){
           toast.success("Caption Created Successfully")
-          console.log(response.data)
+       
           setCaption(response.data)
         
           localStorage.setItem("token",response.data.token)

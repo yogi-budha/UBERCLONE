@@ -69,7 +69,7 @@ const logout = async(req,res)=>{
     const token = req.cookies.token || req.headers.authorization.split("")[1]
     const blackListedToken = await BlackListToken.create({token})
     res.clearCookie("token")
-    return res.status(200).json({success:false,message:"logout successfully"})
+    return res.status(200).json({success:true,message:"logout successfully"})
 }
 export {
     registerCaption,loginCaption,profileCaption,logout
